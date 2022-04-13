@@ -21,3 +21,9 @@ npx sequelize-cli db:seed:all
 ```
 npx sequelize-cli model:generate --name user --attributes name:string,password:string,email:string
 ```
+
+### Create a seed for models user and post
+
+```
+npx sequelize-cli seed:generate --name create-some-users-and-posts
+```
