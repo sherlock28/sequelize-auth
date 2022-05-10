@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const authConfig = require('../../config/auth');
+const { User } = require('../models')
 
 module.exports = (req, res, next) => {
 
@@ -32,8 +33,12 @@ module.exports = (req, res, next) => {
                 error: null
             });
         } else {
-            req.user = decoded;
-            next();
+            User.findByPk(decoded.user.id, { include: "roles" }).then(user => {
+                if (user) {
+                    req.user = user;
+                }
+                next();
+            });
         }
     });
 }

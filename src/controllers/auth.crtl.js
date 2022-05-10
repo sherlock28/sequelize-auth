@@ -14,7 +14,7 @@ module.exports = {
         })
             .then(user => {
                 if (!user) {
-                    return res.status(400).send({
+                    return res.status(400).json({
                         success: false,
                         payload: null,
                         msg: 'Invalid email or password',
@@ -23,7 +23,7 @@ module.exports = {
                 }
 
                 if (!bcrypt.compareSync(password, user.password)) {
-                    return res.status(400).send({
+                    return res.status(400).json({
                         success: false,
                         payload: null,
                         msg: 'Invalid email or password',
@@ -43,7 +43,7 @@ module.exports = {
                     expiresIn: authConfig.expiresIn
                 });
 
-                return res.send({
+                return res.json({
                     success: true,
                     payload: {
                         user,
@@ -54,7 +54,7 @@ module.exports = {
                 });
             })
             .catch(err => {
-                return res.status(400).send({
+                return res.status(400).json({
                     success: false,
                     payload: null,
                     msg: 'Error on the server.',
