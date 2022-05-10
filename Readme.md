@@ -3,6 +3,10 @@
 ```
 npx sequelize-cli init
 ```
+### Create migration
+```
+npx sequelize-cli migration:generate --name create-user-role
+```
 
 ### Run migrations
 
