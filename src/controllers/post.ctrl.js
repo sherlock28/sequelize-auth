@@ -28,24 +28,12 @@ module.exports = {
     },
 
     async showPost(req, res) {
-        let post = await Post.findByPk(req.params.id);
-
-        if (!post) {
-            return res.status(404).json({
-                success: false,
-                payload: null,
-                msg: 'Post not found',
-                error: null
-            });
-        }
-        else {
-            return res.json({
-                success: true,
-                payload: post,
-                msg: 'Post retrieved successfully',
-                error: null
-            });
-        }
+        return res.json({
+            success: true,
+            payload: req.post,
+            msg: 'Post retrieved successfully',
+            error: null
+        });
     },
 
     async updatePost(req, res) {
