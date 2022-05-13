@@ -1,25 +1,28 @@
 const router = require('express').Router();
-const { signIn, signUp } = require('../controllers/auth.crtl');
-const { index, showPost, createPost, updatePost, deletePost } = require('../controllers/post.ctrl');
+const control = require('../controllers');
 
-const auth = require('../middlewares/auth');
-const find = require('../middlewares/posts');
-
+// Default route
 router.get('/', (req, res) => {
     res.json({
-        msg: 'Hello World'
+        msg: 'API REST - Posts - v1.0.0'
+    });
+});
+
+router.get('/doc', (req, res) => {
+    res.json({
+        msg: 'API documentation'
     });
 });
 
 // Auth routes
-router.post('/signin', signIn);
-router.post('/signup', signUp);
+router.post('/signin', ...control.signInCtrls);
+router.post('/signup', ...control.signUpCtrls);
 
 // Post routes
-router.get('/posts', auth, index);
-router.get('/posts/:id', auth, find, showPost);
-router.post('/posts', createPost);
-router.put('/posts', updatePost);
-router.delete('/posts', deletePost);
+router.get('/posts', ...control.showAllPostCtrls);
+router.get('/posts/:id', ...control.findPostByIdCtrls);
+router.post('/posts', ...control.createPostCtrls);
+router.put('/posts', ...control.updatePostCtrls);
+router.delete('/posts', ...control.deletePostCtrls);
 
 module.exports = router;

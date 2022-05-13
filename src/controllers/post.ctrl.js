@@ -1,7 +1,7 @@
 const { Post } = require('../models');
 
 module.exports = {
-    async index(req, res) {
+    async showAllPost(req, res) {
         Post.findAll().then(posts => {
             return res.json({
                 success: true,
