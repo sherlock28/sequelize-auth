@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Post, { as: 'posts', foreignKey: 'user_id' });
       User.belongsToMany(models.Role, { as: 'roles', through: 'user_role', foreignKey: 'user_id' });
     }
+
+    static isAdmin = function name(roles) {
+      return roles.map(role => role.role).includes('admin');
+    }
   }
   User.init({
     name: {
