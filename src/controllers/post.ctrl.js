@@ -37,55 +37,27 @@ module.exports = {
     },
 
     async updatePost(req, res) {
-        let post = await Post.findByPk(req.params.id);
+        req.post.title = req.body.title;
+        req.post.body = req.body.body;
 
-        if (!post) {
-            return res.status(404).json({
-                success: false,
-                payload: null,
-                msg: 'Post not found',
+        post.save().then(post => {
+            return res.json({
+                success: true,
+                payload: post,
+                msg: 'Post updated successfully',
                 error: null
             });
-        }
-        else {
-
-            post.title = req.body.title;
-            post.body = req.body.body;
-
-            post.save().then(post => {
-                return res.json({
-                    success: true,
-                    payload: post,
-                    msg: 'Post updated successfully',
-                    error: null
-                });
-            });
-        }
+        });
     },
 
     async deletePost(req, res) {
-        let post = await Post.findByPk(req.params.id);
-
-        if (!post) {
-            return res.status(404).json({
-                success: false,
-                payload: null,
-                msg: 'Post not found',
+        req.post.destroy().then(post => {
+            return res.json({
+                success: true,
+                payload: post,
+                msg: 'Post deleted successfully',
                 error: null
             });
-        }
-        else {
-
-            post.destroy().then(post => {
-                return res.json({
-                    success: true,
-                    payload: post,
-                    msg: 'Post deleted successfully',
-                    error: null
-                });
-            });
-
-        }
+        });
     },
-
 }
