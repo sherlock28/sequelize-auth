@@ -10,7 +10,7 @@ module.exports = {
 
       User.create({
         name: 'johndoe1',
-        email: 'johndoe@gmail.com',
+        email: 'johndoe1@gmail.com',
         password: bcrypt.hashSync('123456', +authConfig.rounds),
         posts: [
           {
@@ -28,7 +28,7 @@ module.exports = {
 
       User.create({
         name: 'janedoe2',
-        email: 'janedoe@gmail.com',
+        email: 'janedoe2@gmail.com',
         password: bcrypt.hashSync('123456', +authConfig.rounds),
         posts: [
           {
